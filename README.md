@@ -7,5 +7,6 @@ For the given csv(comma seperated values) that represents a user daily transacti
     3.Given a date, return the portfolio value per token in USD on that date
     4.Given a date and a token, return the portfolio value of that token in USD on that date
 
-#Data Description:The data to be manipulated has :timestamps that are the Epoch date,transaction_type can be either DEPOSIT or WITHDRAW,token are only of three type i.e 'BTC','ETH','XRP'
+#Data Description:
+The data to be manipulated has :timestamps that are the Epoch date,transaction_type can be either DEPOSIT or WITHDRAW,token are only of three type i.e 'BTC','ETH','XRP'
 
