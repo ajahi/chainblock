@@ -162,7 +162,7 @@ You must have Node and npm installed in your local machine .Clone this repo and 
 
     npm install
 
-to sun the program ,input in the terminal<br>
+to run the program ,input in the terminal<br>
 
 
     node main
