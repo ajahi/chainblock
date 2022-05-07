@@ -153,3 +153,16 @@ To follow indutry security standard i have separated the apikey to the cryptocom
 <h1>Conclusion</h1>
 In this opportunity given by the Propine technology ,i collected and gained various knowledge as per how to read and manipulate large file of data with small memory .How to ask question directly from the terminal and write a readme to a program that you have built for others to understand your perspective to the design.
 
+<h1>To make it work in a local Env</h1>
+You must have Node and npm installed in your local machine .Clone this repo and then perform,<br>
+
+
+    cd git-repo
+
+
+    npm install
+
+to sun the program ,input in the terminal<br>
+
+
+    node main
