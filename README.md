@@ -146,8 +146,9 @@ then similar to previous procedure the total token of respective token are colle
 
 
 <h1>Minor adjustment in design.</h1>
-To collect all the different condition for a proper user experience ,i carefully placed them in switch case and then again utlizied recursice calling of function.The use of recursive calling will help in error while entering number of different condition to user.<br>
-To verify the number of the data collected against the Date inserted ,i utilized use variable called "validDataUnderInputdate" which add if the required condition is fulfilled for the different condition.
+To collect all the different condition for a proper user experience ,i carefully placed them in switch case and then again utlizied recursive calling of function.The use of recursive calling will help in error mitigation while entering number of different condition by user.<br>
+To verify the number of the data collected against the Date inserted ,i utilized use variable called "validDataUnderInputdate" which add if the required condition is fulfilled for the different condition.<br>
+To follow indutry security standard i have separated the apikey to the cryptocompare in a separate variable.But for convenience of Mentor i have kept the secret apikey in the same file as the main js file.
 
 <h1>Conclusion</h1>
 In this opportunity given by the Propine technology ,i collected and gained various knowledge as per how to read and manipulate large file of data with small memory .How to ask question directly from the terminal and write a readme to a program that you have built for others to understand your perspective to the design.
