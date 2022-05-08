@@ -21,7 +21,7 @@ As suggested by Mentors from Propine, "Cryptocompare" API was used to call for n
 
 <h1>Working process</h1>
 <h3>For Condition 1</h3>
-After initial reading of stream data and asking questions were solved. i took first initiation to get the total sum of all the token information from the data given.simple if statement that will sort data according to its token and will either add to the token variable if its a type of "Deposit" else if its transaction type of "Withdraw" it will subtract from the said variable of the token.This operation usually took my okay computer about 90 seconds to go through all the 30 million data available.
+After initial reading of stream data and asking questions were solved. i took first initiation to get the total sum of all the token information from the data given.A simple if statement sorts data according to its token and will either add to the token respective variable if its a type of "Deposit" else if its transaction type of "Withdraw" it will subtract from the said variable of the token.This operation usually took my okay computer about 90 seconds to go through all the 30 million data available.
 initial code:
 
 
