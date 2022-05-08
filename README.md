@@ -158,3 +158,7 @@ to run the program ,input in the terminal<br>
 
 
     node main
+
+To enter date of appropriate format ,or convert epoch to a appropraite date<a href ='https://www.epoch101.com/'> Epoch date </a> 
+<bold>Remove the Day given in front of the output.
+</bold>

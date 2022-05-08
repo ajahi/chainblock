@@ -12,17 +12,17 @@ const parsestream=readable.pipe(csv());
 
 
 
-let BTCsum=0;
-let Esum=0;
-let Xsum=0;
+let BTCsum=0;//btc coin sum
+let ETHsum=0;//eth coin sum
+let XRPsum=0;//xrp coin sum
 let parseDate=0;//this is to parse input date
-let validDataUnderInputdate=0;
+let validDataUnderInputdate=0;//to check if data are of valid input
 
-let sum=0
+let sum=0//for individual token sum
 
-let BTCvalue=0
-let ETHvalue=0;
-let XRPvalue=0;
+let BTCvalue=0//to store actual worth of the coin at said date in usd ,btc
+let ETHvalue=0;//to store actual worth of the coin at said date in usd ,eth
+let XRPvalue=0;//to store actual worth of the coin at said date in usd ,xrp
 const secretKey='bea66d2297af44dec394597b938dfa3f08c3f3b72b232da36e9366bebb9d79e6';
 
 const checker=function(data){
@@ -33,16 +33,16 @@ const checker=function(data){
         BTCsum-=+data.amount;
     }
     else if(data.token==='XRP'&&data.transaction_type==='DEPOSIT'){
-        Xsum+=+data.amount;
+        XRPsum+=+data.amount;
     }
     else if(data.token==='XRP'&&data.transaction_type==='WITHDRAWAL'){
-        Xsum-=+data.amount;
+        XRPsum-=+data.amount;
     }
     else if(data.token==='ETH'&&data.transaction_type==='DEPOSIT'){
-        Esum+=+data.amount;
+        ETHsum+=+data.amount;
     }
     else if(data.token==='ETH'&&data.transaction_type==='WITHDRAWAL'){
-        Esum-=+data.amount;
+        ETHsum-=+data.amount;
     }
 }
 
@@ -57,20 +57,21 @@ const mainFunction=function (){
  `,(inp)=>{
      switch(inp){
          case '1':
+            console.log('You have Entered 1');
              parsestream.on('data',(data)=>{
                 validDataUnderInputdate++;
                 checker(data);
              })
              .on('end',()=>{
              
-                     console.log({BTCsum,Esum,Xsum})
+                     console.log({BTCsum,ETHsum,XRPsum})
                      const url=`https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,XRP&tsyms=USD&api_key=${secretKey}`;
                      request({url:url},(error,res,body)=>{
                      if(!error&&res.statusCode==200){
                          const parseData=JSON.parse(body);
                          const BTCvalue=parseData['BTC']['USD']*BTCsum;
-                         const ETHvalue=parseData['ETH']['USD']*Esum;
-                         const XRPvalue=parseData['XRP']['USD']*Xsum;
+                         const ETHvalue=parseData['ETH']['USD']*ETHsum;
+                         const XRPvalue=parseData['XRP']['USD']*XRPsum;
 
                          console.log('Total BTC USD: $'+BTCvalue.toLocaleString(),'Total ETH in USD: $'+ETHvalue.toLocaleString(),'Total XRP USD: $'+XRPvalue.toLocaleString());
 
@@ -78,6 +79,7 @@ const mainFunction=function (){
                          
                          console.log('TotalValue:USD '+Totalvalue.toLocaleString(),{validDataUnderInputdate});
                      }
+                     
                      readline.close();
                      })
                      
@@ -86,6 +88,7 @@ const mainFunction=function (){
              
              break;
          case '2':
+            console.log('You have Entered 2');
              readline.question('Enter Token:',(input2)=>{
                  const token=input2;
                  parsestream.on('data',(data)=>{
@@ -109,11 +112,13 @@ const mainFunction=function (){
                     }
                     })
                 });
+                
                  readline.close();
              })
              
              break;
          case '3':
+            console.log('You have Entered 3');
             readline.question(`Enter Date? \n date must be of valid format in GMT,i.e:01 Jan 1970 00:00:00 GMT\n`,( date => {
                 parseDate=Date.parse(date);
                 console.log(`Date in Epoch ${parseDate/1000}`)
@@ -140,7 +145,7 @@ const mainFunction=function (){
                             request({url:url2},(error,res,body2)=>{
                                 if(!error&&res.statusCode==200){
                                     const parseData2=JSON.parse(body2);
-                                    ETHvalue=parseData2['Data']['Data'][0]['close']*Esum;
+                                    ETHvalue=parseData2['Data']['Data'][0]['close']*ETHsum;
                                     console.log(parseData2['Data']['Data'][0]['close']);
                                     console.log(`Total value of ETH $${ETHvalue.toLocaleString()}`);    
 
@@ -166,10 +171,12 @@ const mainFunction=function (){
                 
                 readline.close();
             }));
+            
              break;
          case '4':
+            console.log('You have Entered 4');
             readline.question(`Enter Date? \n date must be of valid type in GMT,i.e:01 Jan 1970 00:00:00 GMT\n
-                                For BTC enter date after 2009,For ETH enter date after 2015,for XRP enter date after 2012.
+                                note:For BTC enter date after 2009,For ETH enter date after 2015,for XRP enter date after 2012.
             `,( date => {
                 sum=0;
                 parseDate=Date.parse(date);
@@ -204,16 +211,19 @@ const mainFunction=function (){
                             }
                         })
                     });
+                    
                     readline.close();
                 }))
                 
             }));
+            
              break;
         
          default:
              console.log('Only enter num 1-4');
+             mainFunction();
      }
-     mainFunction();
+     
      
  });
 } 
