@@ -25,30 +25,25 @@ let ETHvalue=0;
 let XRPvalue=0;
 const secretKey='bea66d2297af44dec394597b938dfa3f08c3f3b72b232da36e9366bebb9d79e6';
 
-const main=function mainFunction(data){
-    //   console.log(data.timestamp,parseDate/1000)
-    //     console.log(data.timestamp<parseDate/1000)
-    if(parseDate/1000 >= data.timestamp){
-        validDataunderdate++;
-        if(data.token==='BTC'&&data.transaction_type==='DEPOSIT'){
-            BTCsum+=+data.amount;
-        }
-        else if(data.token==='BTC'&&data.transaction_type==='WITHDRAWAL'){
-            BTCsum-=+data.amount;
-        }
-        else if(data.token==='XRP'&&data.transaction_type==='DEPOSIT'){
-            Xsum+=+data.amount;
-        }
-        else if(data.token==='XRP'&&data.transaction_type==='WITHDRAWAL'){
-            Xsum-=+data.amount;
-        }
-        else if(data.token==='ETH'&&data.transaction_type==='DEPOSIT'){
-            Esum+=+data.amount;
-        }
-        else if(data.token==='ETH'&&data.transaction_type==='WITHDRAWAL'){
-            Esum-=+data.amount;
-        }
-    }                        
+const checker=function(data){
+    if(data.token==='BTC'&&data.transaction_type==='DEPOSIT'){
+        BTCsum+=+data.amount;
+    }
+    else if(data.token==='BTC'&&data.transaction_type==='WITHDRAWAL'){
+        BTCsum-=+data.amount;
+    }
+    else if(data.token==='XRP'&&data.transaction_type==='DEPOSIT'){
+        Xsum+=+data.amount;
+    }
+    else if(data.token==='XRP'&&data.transaction_type==='WITHDRAWAL'){
+        Xsum-=+data.amount;
+    }
+    else if(data.token==='ETH'&&data.transaction_type==='DEPOSIT'){
+        Esum+=+data.amount;
+    }
+    else if(data.token==='ETH'&&data.transaction_type==='WITHDRAWAL'){
+        Esum-=+data.amount;
+    }
 }
 
 
@@ -64,24 +59,7 @@ const mainFunction=function (){
          case '1':
              parsestream.on('data',(data)=>{
                 validDataUnderInputdate++;
-                 if(data.token==='BTC'&&data.transaction_type==='DEPOSIT'){
-                     BTCsum+=+data.amount;
-                 }
-                 else if(data.token==='BTC'&&data.transaction_type==='WITHDRAWAL'){
-                     BTCsum-=+data.amount;
-                 }
-                 else if(data.token==='XRP'&&data.transaction_type==='DEPOSIT'){
-                     Xsum+=+data.amount;
-                 }
-                 else if(data.token==='XRP'&&data.transaction_type==='WITHDRAWAL'){
-                     Xsum-=+data.amount;
-                 }
-                 else if(data.token==='ETH'&&data.transaction_type==='DEPOSIT'){
-                     Esum+=+data.amount;
-                 }
-                 else if(data.token==='ETH'&&data.transaction_type==='WITHDRAWAL'){
-                     Esum-=+data.amount;
-                 }
+                checker(data);
              })
              .on('end',()=>{
              
@@ -94,16 +72,18 @@ const mainFunction=function (){
                          const ETHvalue=parseData['ETH']['USD']*Esum;
                          const XRPvalue=parseData['XRP']['USD']*Xsum;
 
-                         console.log('TotalBTCUSD: '+BTCvalue.toLocaleString(),'TotalETHUSD: '+ETHvalue.toLocaleString(),'TotalXRPUSD: '+XRPvalue.toLocaleString());
+                         console.log('Total BTC USD: $'+BTCvalue.toLocaleString(),'Total ETH in USD: $'+ETHvalue.toLocaleString(),'Total XRP USD: $'+XRPvalue.toLocaleString());
 
                          const Totalvalue=BTCvalue+ETHvalue+XRPvalue;
                          
                          console.log('TotalValue:USD '+Totalvalue.toLocaleString(),{validDataUnderInputdate});
                      }
+                     readline.close();
                      })
+                     
                  });
-             console.log('entered 1');
-             readline.close();
+             
+             
              break;
          case '2':
              readline.question('Enter Token:',(input2)=>{
@@ -140,24 +120,7 @@ const mainFunction=function (){
                 parsestream.on('data',(data)=>{
                     if(parseDate/1000 >= data.timestamp){
                         validDataUnderInputdate++;
-                        if(data.token==='BTC'&&data.transaction_type==='DEPOSIT'){
-                            BTCsum+=+data.amount;
-                        }
-                        else if(data.token==='BTC'&&data.transaction_type==='WITHDRAWAL'){
-                            BTCsum-=+data.amount;
-                        }
-                        else if(data.token==='XRP'&&data.transaction_type==='DEPOSIT'){
-                            Xsum+=+data.amount;
-                        }
-                        else if(data.token==='XRP'&&data.transaction_type==='WITHDRAWAL'){
-                            Xsum-=+data.amount;
-                        }
-                        else if(data.token==='ETH'&&data.transaction_type==='DEPOSIT'){
-                            Esum+=+data.amount;
-                        }
-                        else if(data.token==='ETH'&&data.transaction_type==='WITHDRAWAL'){
-                            Esum-=+data.amount;
-                        }
+                        checker(data);
                     }
                 }).on('end',()=>{
              
